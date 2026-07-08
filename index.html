@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSME FinScore Card | Titans | IDBI Innovate 2026</title>
+    <style>
+      :root {
+        --idbi-orange: #f7642a;
+        --idbi-green: #0d7a5f;
+        --dark: #1c2b33;
+        --bg: #f4f7f6;
+        --good: #1f9d55;
+        --moderate: #e0a30b;
+        --weak: #d9534f;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: var(--bg);
+        margin: 0;
+        color: var(--dark);
+      }
+      header {
+        background: linear-gradient(
+          90deg,
+          var(--idbi-green),
+          var(--idbi-orange)
+        );
+        color: white;
+        padding: 18px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 22px;
+      }
+      header span {
+        font-size: 13px;
+        opacity: 0.9;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 20px auto;
+        padding: 0 20px;
+      }
+      .controls {
+        background: white;
+        border-radius: 10px;
+        padding: 16px 20px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .controls label {
+        font-weight: 600;
+        margin-right: 6px;
+      }
+      select,
+      button {
+        padding: 8px 14px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+      }
+      button {
+        background: var(--idbi-green);
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      button:hover {
+        opacity: 0.9;
+      }
+      .card {
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        padding: 26px;
+        margin-bottom: 22px;
+      }
+      .top-row {
+        display: flex;
+        gap: 26px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .dial-wrap {
+        text-align: center;
+        min-width: 200px;
+      }
+      svg#dial {
+        width: 200px;
+        height: 200px;
+      }
+      .score-num {
+        font-size: 34px;
+        font-weight: 800;
+      }
+      .band {
+        display: inline-block;
+        padding: 4px 14px;
+        border-radius: 20px;
+        color: white;
+        font-weight: 700;
+        font-size: 13px;
+        margin-top: 6px;
+      }
+      .band.Good {
+        background: var(--good);
+      }
+      .band.Moderate {
+        background: var(--moderate);
+      }
+      .band.Weak {
+        background: var(--weak);
+      }
+      .rec-banner {
+        flex: 1;
+        min-width: 260px;
+        background: #eef7f4;
+        border-left: 5px solid var(--idbi-green);
+        padding: 14px 18px;
+        border-radius: 8px;
+      }
+      .rec-banner h3 {
+        margin: 0 0 6px 0;
+        font-size: 16px;
+      }
+      .pillars {
+        margin-top: 22px;
+      }
+      .pillar-row {
+        margin-bottom: 14px;
+      }
+      .pillar-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .bar-bg {
+        background: #e6e6e6;
+        border-radius: 6px;
+        height: 12px;
+        overflow: hidden;
+      }
+      .bar-fill {
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          var(--idbi-green),
+          var(--idbi-orange)
+        );
+        border-radius: 6px;
+        transition: width 0.6s ease;
+      }
+      .two-col {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .col {
+        flex: 1;
+        min-width: 260px;
+      }
+      .reason-list {
+        list-style: none;
+        padding: 0;
+        margin: 8px 0 0 0;
+      }
+      .reason-list li {
+        padding: 8px 10px;
+        border-radius: 6px;
+        margin-bottom: 6px;
+        font-size: 13.5px;
+      }
+      .reason-list li.plus {
+        background: #e9f8ee;
+        border-left: 4px solid var(--good);
+      }
+      .reason-list li.minus {
+        background: #fdecec;
+        border-left: 4px solid var(--weak);
+      }
+      .consent-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+        font-size: 12.5px;
+      }
+      .chip {
+        background: #eef2f1;
+        padding: 5px 10px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .chip .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--good);
+      }
+      footer {
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+        padding: 20px 0 40px;
+      }
+      .disclaimer {
+        background: #fff6e6;
+        border: 1px solid #f0d38a;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 12.5px;
+        margin-bottom: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>🏦 MSME FinScore Card</h1>
+        <span
+          >IDBI Innovate 2026 · Track 03 — Financial Health Score · Team
+          Titans</span
+        >
+      </div>
+      <span>Prototype (PoC) — synthetic data</span>
+    </header>
+
+    <div class="container">
+      <div class="disclaimer">
+        ⚠️ This is a <b>Proof-of-Concept prototype</b> using
+        <b>synthetic/mock data</b> to demonstrate the scoring methodology,
+        explainability and UX. It is not connected to live GST/UPI/AA/EPFO
+        systems.
+      </div>
+
+      <div class="controls">
+        <label for="profileSelect">Select MSME Profile:</label>
+        <select id="profileSelect" onchange="renderProfile(this.value)">
+          <option value="strong">Sharma Textiles Pvt Ltd (Established)</option>
+          <option value="thin">Rani Handicrafts (New-to-Credit)</option>
+        </select>
+        <button
+          onclick="
+            renderProfile(document.getElementById('profileSelect').value)
+          "
+        >
+          Re-run Score
+        </button>
+      </div>
+
+      <div class="card">
+        <h2 id="bizName" style="margin-top: 0"></h2>
+        <div class="top-row">
+          <div class="dial-wrap">
+            <svg id="dial" viewBox="0 0 200 200">
+              <circle
+                cx="100"
+                cy="100"
+                r="85"
+                fill="none"
+                stroke="#e6e6e6"
+                stroke-width="16"
+              />
+              <circle
+                id="dialArc"
+                cx="100"
+                cy="100"
+                r="85"
+                fill="none"
+                stroke="#0d7a5f"
+                stroke-width="16"
+                stroke-linecap="round"
+                transform="rotate(-90 100 100)"
+              />
+              <text
+                x="100"
+                y="95"
+                text-anchor="middle"
+                class="score-num"
+                id="scoreText"
+                fill="#1c2b33"
+              >
+                0
+              </text>
+              <text
+                x="100"
+                y="118"
+                text-anchor="middle"
+                font-size="12"
+                fill="#666"
+              >
+                / 100 FinScore
+              </text>
+            </svg>
+            <div><span class="band" id="bandLabel"></span></div>
+          </div>
+          <div class="rec-banner">
+            <h3>Recommendation</h3>
+            <p id="recText" style="margin: 0; font-size: 14px"></p>
+          </div>
+        </div>
+
+        <div class="consent-row" id="consentRow"></div>
+
+        <div class="pillars" id="pillarsArea">
+          <h3>Multidimensional Score Breakdown (5 Pillars)</h3>
+        </div>
+
+        <div class="two-col">
+          <div class="col">
+            <h3>✅ Strengths / ⚠️ Risk Flags (Reason Codes)</h3>
+            <ul class="reason-list" id="reasonsList"></ul>
+          </div>
+          <div class="col">
+            <h3>Input Signals (Synthetic Data)</h3>
+            <ul class="reason-list" id="inputsList"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      MSME FinScore Card — Built by Team Titans for IDBI Innovate 2026 (Track
+      03: Financial Health Score) · PoC Prototype
+    </footer>
+
+    <script>
+      const profiles = {
+        strong: {
+          name: "Sharma Textiles Pvt Ltd",
+          gst_filing_consistency_pct: 95,
+          gst_revenue_growth_pct: 18,
+          upi_avg_monthly_txns: 620,
+          upi_volatility_pct: 10,
+          compliance_index: 88,
+          epfo_employee_count: 14,
+          business_vintage_years: 6,
+          debt_to_revenue_ratio_pct: 20,
+          payment_bounce_rate_pct: 1,
+        },
+        thin: {
+          name: "Rani Handicrafts (NTC)",
+          gst_filing_consistency_pct: 78,
+          gst_revenue_growth_pct: 22,
+          upi_avg_monthly_txns: 340,
+          upi_volatility_pct: 22,
+          compliance_index: 65,
+          epfo_employee_count: 2,
+          business_vintage_years: 1.5,
+          debt_to_revenue_ratio_pct: 10,
+          payment_bounce_rate_pct: 3,
+        },
+      };
+
+      function computeFinScore(p) {
+        const reasons = [];
+
+        const revenue_score = Math.min(
+          100,
+          p.gst_filing_consistency_pct * 0.7 +
+            Math.max(0, Math.min(p.gst_revenue_growth_pct, 30)),
+        );
+        reasons.push({
+          pillar: "Revenue Stability",
+          sign: p.gst_filing_consistency_pct >= 90 ? "plus" : "minus",
+          text:
+            p.gst_filing_consistency_pct >= 90
+              ? `GST filing consistency high (${p.gst_filing_consistency_pct}%)`
+              : `GST filing gaps detected (${p.gst_filing_consistency_pct}%)`,
+        });
+
+        const cashflow_score = Math.max(
+          0,
+          Math.min(100, p.upi_avg_monthly_txns / 5 - p.upi_volatility_pct),
+        );
+        reasons.push({
+          pillar: "Cash Flow Health",
+          sign: p.upi_volatility_pct <= 15 ? "plus" : "minus",
+          text:
+            p.upi_volatility_pct <= 15
+              ? `Stable UPI inflows (volatility ${p.upi_volatility_pct}%)`
+              : `High cash-flow volatility (${p.upi_volatility_pct}%)`,
+        });
+
+        const compliance_score = p.compliance_index;
+        reasons.push({
+          pillar: "Compliance & Credibility",
+          sign: compliance_score >= 80 ? "plus" : "minus",
+          text:
+            compliance_score >= 80
+              ? "Strong regulatory compliance track record"
+              : "Inconsistent compliance history",
+        });
+
+        const ops_score = Math.min(
+          100,
+          p.epfo_employee_count * 4 + p.business_vintage_years * 5,
+        );
+        reasons.push({
+          pillar: "Operational Footprint",
+          sign: p.epfo_employee_count >= 5 ? "plus" : "minus",
+          text:
+            p.epfo_employee_count >= 5
+              ? `Established payroll base (${p.epfo_employee_count} employees via EPFO)`
+              : "Limited/no EPFO payroll footprint (thin file)",
+        });
+
+        const debt_score = Math.max(
+          0,
+          100 - p.debt_to_revenue_ratio_pct - p.payment_bounce_rate_pct * 3,
+        );
+        reasons.push({
+          pillar: "Debt & Repayment Behavior",
+          sign: p.payment_bounce_rate_pct <= 2 ? "plus" : "minus",
+          text:
+            p.payment_bounce_rate_pct <= 2
+              ? `Low payment bounce rate (${p.payment_bounce_rate_pct}%)`
+              : `Elevated bounce rate (${p.payment_bounce_rate_pct}%)`,
+        });
+
+        const pillars = {
+          "Revenue Stability": revenue_score,
+          "Cash Flow Health": cashflow_score,
+          "Compliance & Credibility": compliance_score,
+          "Operational Footprint": ops_score,
+          "Debt & Repayment Behavior": debt_score,
+        };
+
+        const weights = {
+          "Revenue Stability": 0.25,
+          "Cash Flow Health": 0.25,
+          "Compliance & Credibility": 0.2,
+          "Operational Footprint": 0.15,
+          "Debt & Repayment Behavior": 0.15,
+        };
+
+        let overall = 0;
+        for (const k in pillars) overall += pillars[k] * weights[k];
+        overall = Math.round(overall * 10) / 10;
+
+        let band, recommendation;
+        if (overall >= 75) {
+          band = "Good";
+          recommendation =
+            "Approve — strong alternate-data profile supports lending.";
+        } else if (overall >= 55) {
+          band = "Moderate";
+          recommendation =
+            "Approve with conditions / lower initial limit — monitor for 2-3 cycles.";
+        } else {
+          band = "Weak";
+          recommendation =
+            "Refer for manual review — insufficient positive signals.";
+        }
+
+        return { overall, band, recommendation, pillars, reasons };
+      }
+
+      function renderProfile(key) {
+        const p = profiles[key];
+        const result = computeFinScore(p);
+
+        document.getElementById("bizName").textContent = p.name;
+        document.getElementById("scoreText").textContent = result.overall;
+        document.getElementById("bandLabel").textContent = result.band;
+        document.getElementById("bandLabel").className = "band " + result.band;
+        document.getElementById("recText").textContent = result.recommendation;
+
+        // dial arc
+        const circumference = 2 * Math.PI * 85;
+        const pct = result.overall / 100;
+        const arc = document.getElementById("dialArc");
+        arc.setAttribute(
+          "stroke-dasharray",
+          `${circumference * pct} ${circumference}`,
+        );
+        let color =
+          result.band === "Good"
+            ? "#1f9d55"
+            : result.band === "Moderate"
+              ? "#e0a30b"
+              : "#d9534f";
+        arc.setAttribute("stroke", color);
+
+        // pillars
+        const pillarsArea = document.getElementById("pillarsArea");
+        pillarsArea.innerHTML =
+          "<h3>Multidimensional Score Breakdown (5 Pillars)</h3>";
+        for (const [name, val] of Object.entries(result.pillars)) {
+          const row = document.createElement("div");
+          row.className = "pillar-row";
+          row.innerHTML = `
+      <div class="pillar-label"><span>${name}</span><span>${Math.round(val)}/100</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${Math.min(val, 100)}%"></div></div>
+    `;
+          pillarsArea.appendChild(row);
+        }
+
+        // reasons
+        const reasonsList = document.getElementById("reasonsList");
+        reasonsList.innerHTML = "";
+        result.reasons.forEach((r) => {
+          const li = document.createElement("li");
+          li.className = r.sign;
+          li.textContent =
+            (r.sign === "plus" ? "✅ " : "⚠️ ") + `[${r.pillar}] ${r.text}`;
+          reasonsList.appendChild(li);
+        });
+
+        // inputs
+        const inputsList = document.getElementById("inputsList");
+        inputsList.innerHTML = "";
+        const labels = {
+          gst_filing_consistency_pct: "GST filing consistency (%)",
+          gst_revenue_growth_pct: "GST revenue growth YoY (%)",
+          upi_avg_monthly_txns: "Avg. monthly UPI transactions",
+          upi_volatility_pct: "UPI cash-flow volatility (%)",
+          compliance_index: "Compliance index (0-100)",
+          epfo_employee_count: "EPFO employee count",
+          business_vintage_years: "Business vintage (years)",
+          debt_to_revenue_ratio_pct: "Debt-to-revenue ratio (%)",
+          payment_bounce_rate_pct: "Payment bounce rate (%)",
+        };
+        for (const [k, v] of Object.entries(p)) {
+          if (k === "name") continue;
+          const li = document.createElement("li");
+          li.style.background = "#f4f7f6";
+          li.style.borderLeft = "4px solid #0d7a5f";
+          li.textContent = `${labels[k] || k}: ${v}`;
+          inputsList.appendChild(li);
+        }
+
+        // consent chips
+        const consentRow = document.getElementById("consentRow");
+        consentRow.innerHTML = "";
+        ["GST", "UPI", "Account Aggregator", "EPFO"].forEach((src) => {
+          const chip = document.createElement("div");
+          chip.className = "chip";
+          chip.innerHTML = `<span class="dot"></span> ${src}: Consent Granted (mock)`;
+          consentRow.appendChild(chip);
+        });
+      }
+
+      renderProfile("strong");
+    </script>
+  </body>
+</html>
